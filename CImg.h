@@ -565,7 +565,9 @@ extern "C" {
 #if __GNUC__>=5
 #pragma GCC diagnostic push
 #pragma GCC diagnostic ignored "-Wdeprecated"
+#if __GNUC__<7
 #pragma GCC diagnostic ignored "-Wdeprecated-copy"
+#endif
 #pragma GCC diagnostic ignored "-Wshadow"
 #endif
 #include "ImfRgbaFile.h"
