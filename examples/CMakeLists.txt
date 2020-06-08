@@ -101,6 +101,8 @@ SET(CIMG_FFMPEG_CCFLAGS  -Dcimg_use_ffmpeg)
 # Flags to enable native support of most classical image file formats, using the Magick++ library.
 # ( http://www.imagemagick.org/Magick++/ )
 SET(CIMG_MAGICK_CCFLAGS -Dcimg_use_magick)
+SET(CIMG_MAGICK_CCFLAGS -DMAGICKCORE_HDRI_ENABLE=1)
+SET(CIMG_MAGICK_CCFLAGS -DMAGICKCORE_QUANTUM_DEPTH=8)
 
 # Flags to enable faster Discrete Fourier Transform computation, using the FFTW3 library
 # ( http://www.fftw.org/ )
@@ -121,7 +123,6 @@ FIND_PACKAGE(BLAS)
 PKG_CHECK_MODULES(FFTW3 fftw3)
 PKG_CHECK_MODULES(OPENEXR OpenEXR)
 PKG_CHECK_MODULES(MAGICK Magick++)
-
 # PKG_CHECK_MODULES(LIBAVCODEC libavcodec)
 # PKG_CHECK_MODULES(LIBAVFORMAT libavformat)
 # PKG_CHECK_MODULES(LIBSWSCALE libswscale)
@@ -179,7 +180,7 @@ if(FFTW3_FOUND)
   SET(CIMG_CFLAGS "${CIMG_CFLAGS} ${CIMG_FFTW3_CCFLAGS}")
   link_directories( ${FFTW3_LIBRARY_DIRS} )
   include_directories( ${FFTW3_INCLUDE_DIRS} )
-  SET( SYSTEM_LIBS ${SYSTEM_LIBS} ${FFTW3_LIBRARIES} )
+  SET( SYSTEM_LIBS ${SYSTEM_LIBS} ${FFTW3_LIBRARIES} fftw3f_threads fftw3_threads )
 endif()
 
 
